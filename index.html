@@ -24,7 +24,7 @@
             font-family: 'Kanit', sans-serif;
         }
 
-        /* 1. Animated Gradient Background (พื้นหลังขยับได้) */
+        /* Animated Gradient Background */
         body {
             background: linear-gradient(-45deg, #e0f2fe, #fef3c7, #fce7f3, #e0f2fe);
             background-size: 400% 400%;
@@ -222,7 +222,7 @@
             margin-bottom: 25px;
         }
 
-        /* 2. Animated Avatar Aura (ขอบออร่าหมุนได้) */
+        /* Animated Avatar Aura */
         .avatar-wrapper {
             position: relative;
             display: inline-block;
@@ -266,35 +266,6 @@
             font-size: 14px;
             border: 2px solid #fff;
             box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        }
-
-        /* 3. Status Badge Online (ป้ายไฟกระพริบ) */
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(34, 197, 94, 0.12);
-            color: #15803d;
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 4px 12px;
-            border-radius: 20px;
-            margin-bottom: 10px;
-            border: 1px solid rgba(34, 197, 94, 0.3);
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #22c55e;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #22c55e;
-            animation: blink 1.5s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.85); }
         }
 
         h1 {
@@ -345,7 +316,7 @@
             box-shadow: 0 6px 16px rgba(0, 136, 204, 0.15);
         }
 
-        /* 4. Shimmer Effect for VIP Button (ประกายวิ่งผ่าน) */
+        /* Shimmer Effect for VIP Button */
         .btn-telegram-vip {
             background: linear-gradient(135deg, #0088cc 0%, #005580 100%);
             color: #ffffff;
@@ -373,7 +344,7 @@
             box-shadow: 0 8px 22px rgba(0, 136, 204, 0.45);
         }
 
-        /* 5. Pulsing Flame Icon for Tip (ไฟเต้น) */
+        /* Pulsing Flame Icon for Tip */
         .btn-tip {
             background: linear-gradient(135deg, #ff4500 0%, #ff8c00 100%);
             color: #ffffff;
@@ -589,12 +560,6 @@
             <div class="avatar-wrapper">
                 <img src="https://i.pinimg.com/736x/ac/a0/5d/aca05d1a4e80fd2e07850c27a3da8f1a.jpg" alt="KiKilus7sin Profile" class="avatar">
                 <div class="badge-icon"><i class="fa-solid fa-crown"></i></div>
-            </div>
-            <br>
-            <!-- Live Status Indicator -->
-            <div class="status-badge">
-                <span class="status-dot"></span>
-                <span id="txt-status">พร้อมรับงาน / คอนเทนต์ใหม่พร้อมส่ง</span>
             </div>
             
             <h1>KiKilus7sin</h1>
@@ -881,8 +846,7 @@ If I am unable to fulfill your request, you will receive a refund. Please note t
                 checkAge: "ฉันมีอายุ 18 ปีขึ้นไป (I am 18+)",
                 checkAi: "ฉันเข้าใจว่าเนื้อหาทั้งหมดเป็นภาพที่สร้างขึ้น ไม่ใช่บุคคลจริง",
                 btnLeave: "Leave (ออก)",
-                btnContinue: "Continue (เข้าสู่เว็บไซต์)",
-                status: "พร้อมรับงาน / คอนเทนต์ใหม่พร้อมส่ง"
+                btnContinue: "Continue (เข้าสู่เว็บไซต์)"
             },
             en: {
                 subtitle: "Telegram channels, membership details & commission info.",
@@ -902,8 +866,7 @@ If I am unable to fulfill your request, you will receive a refund. Please note t
                 checkAge: "I am 18 years of age or older",
                 checkAi: "I understand that all contents are generated images and not real persons",
                 btnLeave: "Leave",
-                btnContinue: "Continue",
-                status: "Open for Commissions / Daily Updates"
+                btnContinue: "Continue"
             }
         };
 
@@ -922,7 +885,6 @@ If I am unable to fulfill your request, you will receive a refund. Please note t
             document.getElementById('txt-pricing-title').innerText = translations[lang].pricingTitle;
             document.getElementById('txt-img-note').innerText = translations[lang].imgNote;
             document.getElementById('txt-footer').innerText = translations[lang].footer;
-            document.getElementById('txt-status').innerText = translations[lang].status;
 
             // Age Gate Language Update
             document.getElementById('txt-gate-title').innerText = translations[lang].gateTitle;
