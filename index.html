@@ -24,9 +24,9 @@
             font-family: 'Kanit', sans-serif;
         }
 
-        /* 1. Animated Gradient Background (พื้นหลังเลื่อนไหวช้าๆ) */
+        /* 1. Animated Gradient Background */
         body {
-            background: linear-gradient(-45deg, #e0f2fe, #fef3c7, #fce7f3, #e0e7ff);
+            background: linear-gradient(-45deg, #e0f2fe, #fef3c7, #fce7f3, #bae6fd);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             color: var(--text-main);
@@ -273,6 +273,7 @@
             padding: 3px;
             border-radius: 20px;
             border: 1px solid #cbd5e1;
+            z-index: 10;
         }
 
         .lang-btn {
@@ -299,32 +300,45 @@
             margin-bottom: 25px;
         }
 
-        /* 2. Animated Avatar Border (วงแหวนออร่าหมุนรอบรูปโปรไฟล์) */
+        /* 2. Animated Avatar Border (Aura Ring) */
         .avatar-wrapper {
             position: relative;
             display: inline-block;
             margin-bottom: 12px;
-            padding: 5px;
+            padding: 4px;
             border-radius: 50%;
-            background: linear-gradient(45deg, #0088cc, #ffb703, #ff4500, #0088cc);
-            background-size: 300% 300%;
-            animation: rotateAura 4s linear infinite;
         }
 
-        @keyframes rotateAura {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .avatar-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #0088cc, #ffb703, #ff4500, #0088cc);
+            border-radius: 50%;
+            z-index: 0;
+            animation: auraRotate 4s linear infinite;
+        }
+
+        @keyframes auraRotate {
+            0% { transform: rotate(0deg); filter: blur(4px); }
+            50% { filter: blur(8px); }
+            100% { transform: rotate(360deg); filter: blur(4px); }
         }
 
         .avatar {
+            position: relative;
+            z-index: 1;
             width: 95px;
             height: 95px;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid #ffffff;
-            display: block;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
             background-color: #f0f9ff;
+            display: block;
         }
 
         .badge-icon {
@@ -392,79 +406,68 @@
             transform: translateY(-2px);
         }
 
-        /* 3. Pulse & Shimmer Effects for VIP & TIP Buttons */
-
-        /* Shimmer Base (เอฟเฟกต์แสงประกายวิ่งผ่าน) */
-        .btn-telegram-vip::after,
-        .btn-tip::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -60%;
-            width: 50%;
-            height: 200%;
-            background: linear-gradient(
-                60deg,
-                rgba(255, 255, 255, 0) 20%,
-                rgba(255, 255, 255, 0.55) 50%,
-                rgba(255, 255, 255, 0) 80%
-            );
-            transform: rotate(25deg);
-            animation: shimmerSweep 3s infinite;
-        }
-
-        @keyframes shimmerSweep {
-            0% { left: -60%; }
-            30% { left: 130%; }
-            100% { left: 130%; }
-        }
-
-        /* VIP Button with Pulse */
+        /* 3. VIP Button Shimmer Effect */
         .btn-telegram-vip {
             background: linear-gradient(135deg, #0088cc 0%, #005580 100%);
             color: #ffffff;
             border: none;
-            animation: vipPulse 2s infinite;
+            box-shadow: 0 6px 18px rgba(0, 136, 204, 0.3);
         }
 
-        @keyframes vipPulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(0, 136, 204, 0.6);
-            }
-            70% {
-                box-shadow: 0 0 0 12px rgba(0, 136, 204, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(0, 136, 204, 0);
-            }
+        .btn-telegram-vip::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 40%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.4) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(30deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -60%; }
+            30% { left: 120%; }
+            100% { left: 120%; }
         }
 
         .btn-telegram-vip:hover {
-            transform: translateY(-2px) scale(1.02);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(0, 136, 204, 0.45);
         }
 
-        /* TIP Button with Pulse */
+        /* 4. TIP Button Pulse Effect */
         .btn-tip {
             background: linear-gradient(135deg, #ff4500 0%, #ff8c00 100%);
             color: #ffffff;
             border: none;
-            animation: tipPulse 2s infinite 0.5s;
+            animation: pulseGlow 2s infinite ease-in-out;
         }
 
-        @keyframes tipPulse {
+        @keyframes pulseGlow {
             0% {
-                box-shadow: 0 0 0 0 rgba(255, 69, 0, 0.6);
+                transform: scale(1);
+                box-shadow: 0 6px 18px rgba(255, 69, 0, 0.25);
             }
-            70% {
-                box-shadow: 0 0 0 12px rgba(255, 69, 0, 0);
+            50% {
+                transform: scale(1.02);
+                box-shadow: 0 8px 25px rgba(255, 69, 0, 0.55);
             }
             100% {
-                box-shadow: 0 0 0 0 rgba(255, 69, 0, 0);
+                transform: scale(1);
+                box-shadow: 0 6px 18px rgba(255, 69, 0, 0.25);
             }
         }
 
         .btn-tip:hover {
             transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 10px 28px rgba(255, 69, 0, 0.6);
         }
 
         .btn-contact-tg {
@@ -494,6 +497,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            position: relative;
             z-index: 1;
         }
 
@@ -505,6 +509,7 @@
             font-size: 0.75rem;
             padding: 3px 8px;
             border-radius: 20px;
+            position: relative;
             z-index: 1;
         }
 
@@ -736,8 +741,8 @@
                 <span class="tag-badge bg-tip">DONATE</span>
             </a>
 
-            <!-- ติดต่อทาง Telegram -->
-            <a href="https://t.me/your_admin_contact" target="_blank" class="btn-link btn-contact-tg">
+            <!-- ติดต่อทาง Telegram (อัปเดตไอดีแอดมินเรียบร้อย) -->
+            <a href="https://t.me/KiKilus7sinAdmin" target="_blank" class="btn-link btn-contact-tg">
                 <div class="btn-left">
                     <i class="fa-brands fa-telegram"></i>
                     <span id="txt-btn-contact-tg">ติดต่อแอดมิน / สั่ง Commission (Telegram)</span>
